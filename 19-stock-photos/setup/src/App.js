@@ -14,7 +14,8 @@ function App() {
   const [photos, setPhotos] = useState([]);
 
   const fetchImage = async () => {
-    let url = `${mainUrl}${clientID}`;
+    let url;
+    url = `${mainUrl}${clientID}`;
     setLoading(true);
 
     try {
@@ -22,7 +23,7 @@ function App() {
       const data = await response.json();
       setPhotos(data);
       setLoading(false);
-      console.log(process.env.REACT_APP_ACCESS_KEY);
+      console.log(data);
     } catch (error) {
       setLoading(false);
       console.log(error);
