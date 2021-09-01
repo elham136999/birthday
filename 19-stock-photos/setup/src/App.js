@@ -20,6 +20,7 @@ function App() {
       const data = await response.json();
       setPhotos(data);
       setLoading(false);
+      console.log(process.env.REACT_APP_ACCESS_KEY);
     } catch (error) {
       setLoading(false);
       console.log(error);
