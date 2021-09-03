@@ -48,7 +48,12 @@ function App() {
         </form>
       </section>
       <section className='photos'>
-        <div className='photos-center'></div>
+        <div className='photos-center'>
+          {photos.map((image) => {
+            return <Photo key={image.id} {...image} />;
+          })}
+        </div>
+        {loading && <h2 className='loading'> LOADING</h2>}
       </section>
     </main>
   );
