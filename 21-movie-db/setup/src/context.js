@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 // make sure to use https
-export const API_ENDPOINT = `https://www.omdbapi.com/?apikey=${process.env.REACT_APP_MOVIE_API_KEY}`;
+export const API_ENDPOINT = `http://www.omdbapi.com/?i=tt3896198&apikey=${process.env.REACT_APP_MOVIE_API_KEY}`;
 console.log(API_ENDPOINT);
 const AppContext = React.createContext();
 
@@ -15,6 +15,7 @@ const AppProvider = ({ children }) => {
     try {
       const response = await fetch(url);
       const data = await response.json();
+      console.log(data);
 
       if (data.Response === "True") {
         setMovies(data.Search);
@@ -23,7 +24,6 @@ const AppProvider = ({ children }) => {
         setError({ show: true, msg: data.Error });
       }
       setIsLoading(false);
-      console.log(movies);
     } catch (error) {
       console.log(error);
     }
