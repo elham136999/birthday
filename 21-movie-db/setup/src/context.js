@@ -7,15 +7,23 @@ const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState({ show: false, msg: "" });
-  const [movie, setMovie] = useState([]);
+  const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState("batman");
 
   const fetchmovies = async (url) => {
     setIsLoading(true);
     try {
       const response = await fetch(url);
-      const data = response.json();
-      console.log(data);
+      const data = await response.json();
+
+      if (data.Response === "True") {
+        setMovies(data.Search);
+        setError({ show: false, msg: "" });
+      } else {
+        setError({ show: true, msg: data.Error });
+      }
+      setIsLoading(false);
+      console.log(movies);
     } catch (error) {
       console.log(error);
     }
@@ -24,7 +32,11 @@ const AppProvider = ({ children }) => {
   useEffect(() => {
     fetchmovies(`${API_ENDPOINT}&s=${query}`);
   }, [query]);
-  return <AppContext.Provider value='hello'>{children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider value={{ isLoading, error, movies, query, setQuery }}>
+      {children}
+    </AppContext.Provider>
+  );
 };
 // make sure use
 export const useGlobalContext = () => {
