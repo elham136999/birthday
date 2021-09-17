@@ -24,7 +24,7 @@ const Movies = () => {
             <article>
               <img src={poster === "N/A" ? url : poster} alt={title} />
               <div className='movie-info'>
-                <h4 className='movie-title'>{title}</h4>
+                <h4 className='title'>{title}</h4>
                 <p>{year}</p>
               </div>
             </article>
