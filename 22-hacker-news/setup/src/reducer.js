@@ -29,7 +29,7 @@ const reducer = (state, action) => {
     case HANDLE_PAGE:
       if (action.payload === "inc") {
         let nextpage = state.page + 1;
-        if (nextpage > state.nbpages - 1) {
+        if (nextpage > state.nbPages - 1) {
           nextpage = 0;
         }
         return { ...state, page: nextpage };
